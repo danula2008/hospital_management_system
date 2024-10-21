@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface PatientDao extends JpaRepository<PatientEntity, Integer> {
-
     List<PatientEntity> findByNameLike(String name);
     List<PatientEntity> findByContactLike(String contact);
     List<PatientEntity> findByNicLike(String nic);

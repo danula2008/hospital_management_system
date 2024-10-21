@@ -7,7 +7,6 @@ import edu.icet.mis.service.PatientService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,9 +18,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<Patient> getAllPatients() {
-        List<Patient> patientList = new ArrayList<>();
-        repository.findAll().forEach(patientEntity -> patientList.add(mapper.map(patientEntity, Patient.class)));
-        return patientList;
+        return repository.findAll().stream().map(patientEntity -> mapper.map(patientEntity, Patient.class)).toList();
     }
 
     @Override
@@ -41,58 +38,31 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<Patient> getPatientByName(String name) {
-        List<Patient> patientList = new ArrayList<>();
-        for (PatientEntity patientEntity : repository.findByNameLike(name+"%")) {
-            patientList.add(mapper.map(patientEntity, Patient.class));
-        }
-        return patientList;
+        return repository.findByNameLike(name+"%").stream().map(patientEntity -> mapper.map(patientEntity, Patient.class)).toList();
     }
 
     @Override
     public List<Patient> getPatientByContact(String contact) {
-        List<Patient> patientList = new ArrayList<>();
-        for (PatientEntity patientEntity : repository.findByContactLike(contact+"%")) {
-            patientList.add(mapper.map(patientEntity, Patient.class));
-        }
-        return patientList;
+        return repository.findByContactLike(contact+"%").stream().map(patientEntity -> mapper.map(patientEntity, Patient.class)).toList();
     }
 
     @Override
     public List<Patient> getPatientByNic(String nic) {
-        List<Patient> patientList = new ArrayList<>();
-        for (PatientEntity patientEntity : repository.findByNicLike(nic+"%")) {
-            patientList.add(mapper.map(patientEntity, Patient.class));
-        }
-        return patientList;
+        return repository.findByNicLike(nic+"%").stream().map(patientEntity -> mapper.map(patientEntity, Patient.class)).toList();
     }
 
     @Override
     public List<Patient> getPatientByBloodGroup(String bloodGroup) {
-        List<Patient> patientList = new ArrayList<>();
-        for (PatientEntity patientEntity : repository.findByBloodGroup(bloodGroup)) {
-            patientList.add(mapper.map(patientEntity, Patient.class));
-        }
-        return patientList;
+        return repository.findByBloodGroup(bloodGroup).stream().map(patientEntity -> mapper.map(patientEntity, Patient.class)).toList();
     }
 
     @Override
     public List<Patient> getPatientByCategory(String category) {
-        List<Patient> patientList = new ArrayList<>();
-        for (PatientEntity patientEntity : repository.findByCategory(category)) {
-            patientList.add(mapper.map(patientEntity, Patient.class));
-        }
-        return patientList;
+        return repository.findByCategory(category).stream().map(patientEntity -> mapper.map(patientEntity, Patient.class)).toList();
     }
 
     @Override
     public List<Patient> getPatientByAddress(String address) {
-        List<Patient> patientList = new ArrayList<>();
-        for (PatientEntity patientEntity : repository.findByAddressLike(address+"%")) {
-            patientList.add(mapper.map(patientEntity, Patient.class));
-        }
-        return patientList;
+        return repository.findByAddressLike(address+"%").stream().map(patientEntity -> mapper.map(patientEntity, Patient.class)).toList();
     }
-
-
-
 }
